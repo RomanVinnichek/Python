@@ -1,0 +1,29 @@
+n = int(input())
+array = []
+
+
+def incert(i):
+    if (i >= 1) and (int(array[i]) > int(array[(i-1)//2])):
+        array[i], array[(i-1)//2] = array[(i-1)//2], array[i]
+        incert((i-1)//2)
+
+
+def sorty(i=0):
+    if ((2*i+1) <= (len(array)-1)) and (int(array[i]) < int(array[2*i+1])):
+        array[i], array[2*i+1] = array[2*i+1], array[i]
+        sorty(2*i+1)
+    elif ((2*i+2) <= (len(array)-1)) and (int(array[i]) < int(array[2*i+2])):
+        array[i], array[2*i+2] = array[2*i+2], array[i]
+        sorty(2*i+2)
+
+
+for i in range(n):
+    num = input().split()
+    if num[0] == "Insert":
+        array.append(int(num[1]))
+        incert(len(array)-1)
+    else:
+        print(int(array[0]))
+        array[len(array)-1], array[0] = array[0], array[len(array)-1]
+        array.pop()
+        sorty()
